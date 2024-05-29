@@ -28,6 +28,7 @@ public class ProductServiceImpl implements ProductService {
   public List<product> findAll() {
     return repository.findAll().stream().map(p -> {
       System.out.println(environment.getProperty("config.price.tax", Double.class));
+      @SuppressWarnings("null")
       Double priceTax = p.getPrice() * environment.getProperty("config.price.tax", Double.class);
       // product newProd = new product(p.getId(), p.getName(), priceTax.longValue());
       product newProd = (product) p.clone();
@@ -42,5 +43,4 @@ public class ProductServiceImpl implements ProductService {
   public product findById(Long id) {
     return repository.findById(id);
   }
-
 }
